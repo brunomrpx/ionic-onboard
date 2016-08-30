@@ -1,0 +1,38 @@
+<ion-modal-view class="onboard">
+    <ion-content class="has-header" scroll="false">
+        <ion-slides options="vm.options">
+            <ion-slide-page ng-repeat="slide in vm.slides" class="slide" ng-bind-html="slide">
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-positive controls" ng-class="{ 'single-step': vm.isSingleStep() }">
+        <div ng-if="!vm.isSingleStep()">
+            <div class="pagination">
+                {{ vm.slider.activeIndex + 1 }} de {{ vm.slider.slides.length }}
+            </div>
+            <div class="row buttons-container" ng-if="vm.slider.isBeginning">
+                <div class="col col-50">
+                    <button class="button button-clear" ng-click="vm.finishOnboard()">Pular tutorial</button>
+                </div>
+                <div class="col col-50">
+                    <button class="button button-clear" ng-click="vm.nextStep()">Continuar</button>
+                </div>
+            </div>
+            <div class="row buttons-container" ng-if="!vm.slider.isBeginning">
+                <div class="col col-50">
+                    <button class="button button-clear" ng-click="vm.previousStep()">Voltar</button>
+                </div>
+                <div class="col col-50">
+                    <button class="button button-clear" ng-click="vm.nextStep()">Próximo</button>
+                </div>
+            </div>
+        </div>
+        <div ng-if="vm.isSingleStep()">
+            <div class="row responsive-sm buttons-container">
+                <div class="col">
+                    <button class="button button-clear" ng-click="vm.finishOnboard()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-modal-view>
